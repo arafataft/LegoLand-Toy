@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { FaGoogle} from 'react-icons/fa';
+
 // import { useContext } from 'react';
 // import { AuthContext } from '../../providers/AuthProvider';
 import { Container, Col, Card, Form, Button } from 'react-bootstrap';
@@ -27,9 +29,11 @@ const Login = () => {
                 <Button variant="primary" type="submit" className="d-block mx-auto mt-3">Login</Button>
               </Form>
               <p className="text-center mt-3">New to LegoLand Toys? <Link to="/signup">Sign Up</Link></p>
+              <Button className='mb-2 mx-auto d-block' variant="outline-primary"> <FaGoogle /> Login with Google</Button>
             </Card.Body>
           </Card>
         </Col>
+        
       
     </Container>
   );
