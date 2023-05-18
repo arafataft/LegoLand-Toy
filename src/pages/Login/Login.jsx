@@ -8,6 +8,19 @@ import { Container, Col, Card, Form, Button } from 'react-bootstrap';
 
 const Login = () => {
   
+    const handleLogin = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+        // signIn(email, password)
+        //   .then((result) => {
+        //     const user = result.user;
+        //     console.log(user);
+        //   })
+        //   .catch((error) => console.log(error));
+      };
 
   return (
     <Container fluid className="d-flex align-items-center justify-content-center vh-100">
@@ -16,10 +29,10 @@ const Login = () => {
           <Card>
             <Card.Body>
               <h1 className="text-center">Login</h1>
-              <Form >
+              <Form onSubmit={handleLogin}>
                 <Form.Group controlId="email">
                   <Form.Label>Email</Form.Label>
-                  <Form.Control type="text" name="email" placeholder="Email" />
+                  <Form.Control type="email" name="email" placeholder="Email" />
                 </Form.Group>
                 <Form.Group controlId="password">
                   <Form.Label>Password</Form.Label>
