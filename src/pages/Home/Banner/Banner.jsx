@@ -16,7 +16,7 @@ const Banner = () => {
     >
       <div className="text-center">
         <h1 className="mb-3 text-light">
-        <span style={{ color: '#00e68a' }}>Welcome To</span>    <span style={{ color: '#FAAA00 ' }}>LegoLand Toys</span>
+        <span style={{ color: '#00e68a' }}>Welcome To</span>    <span style={{ color: '#FBAF  ' }}>LegoLand Toys</span>
         </h1>
       </div>
     </div>
