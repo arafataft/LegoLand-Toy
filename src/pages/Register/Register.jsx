@@ -1,10 +1,20 @@
-// import { Link } from 'react-router-dom';
 
 import { Container, Col, Card, Form, Button } from 'react-bootstrap';
 
 
 const Register = () => {
   
+    const handleRegister = event => {
+        
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const photo = form.photo.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(name,photo,email,password);
+
+    }
 
   return (
     <Container fluid className="d-flex align-items-center justify-content-center vh-100">
@@ -13,7 +23,7 @@ const Register = () => {
           <Card>
             <Card.Body>
               <h1 className="text-center">Register</h1>
-              <Form >
+              <Form onSubmit={handleRegister}>
                 <Form.Group controlId="email">
                   <Form.Label>Email</Form.Label>
                   <Form.Control type="text" name="email" placeholder="Email" />
