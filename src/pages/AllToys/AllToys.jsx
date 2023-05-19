@@ -1,15 +1,15 @@
-import  { useContext, useState } from 'react';
-import {  useLoaderData, useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { Container, Table, Form, Modal, Button, Image } from 'react-bootstrap';
 import { AuthContext } from '../../Providers/AuthProvider';
 
 const AllToys = () => {
-    const {user}=useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState('');
   const [limit, setLimit] = useState(20);
   const [selectedToy, setSelectedToy] = useState(null);
   const [showModal, setShowModal] = useState(false);
-    const Navigate=useNavigate();
+  const Navigate = useNavigate();
 
   const toys = useLoaderData();
 
@@ -23,11 +23,11 @@ const AllToys = () => {
 
   const handleViewDetails = (toy) => {
     if (user) {
-        setSelectedToy(toy);
-        setShowModal(true);
-      } else {
-        Navigate('/login');
-      }
+      setSelectedToy(toy);
+      setShowModal(true);
+    } else {
+      Navigate('/login');
+    }
   };
 
   const handleModalClose = () => {
@@ -57,37 +57,39 @@ const AllToys = () => {
           <option value="1">1</option>
         </Form.Control>
       </Form.Group>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Seller</th>
-            <th>Toy Name</th>
-            <th>Sub-category</th>
-            <th>Price</th>
-            <th>Available Quantity</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredToys.map((toy, index) => (
-            <tr key={index}>
-              <td>{toy.sellerName}</td>
-              <td>{toy.name}</td>
-              <td>{toy.subCategory}</td>
-              <td>
-                <span>$</span>
-                {toy.price}
-              </td>
-              <td>{toy.quantity}</td>
-              <td>
-                <Button variant="primary" onClick={() => handleViewDetails(toy)}>
-                  View Details
-                </Button>
-              </td>
+      <div className="table-responsive">
+        <Table striped bordered hover responsive>
+          <thead>
+            <tr>
+              <th>Seller</th>
+              <th>Toy Name</th>
+              <th>Sub-category</th>
+              <th>Price</th>
+              <th>Available Quantity</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {filteredToys.map((toy, index) => (
+              <tr key={index}>
+                <td>{toy.sellerName}</td>
+                <td>{toy.name}</td>
+                <td>{toy.subCategory}</td>
+                <td>
+                  <span>$</span>
+                  {toy.price}
+                </td>
+                <td>{toy.quantity}</td>
+                <td>
+                  <Button variant="primary" onClick={() => handleViewDetails(toy)}>
+                    View Details
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
 
       {/* Toy Details Modal */}
       {selectedToy && (
