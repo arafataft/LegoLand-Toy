@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
             displayName: name,
             photoURL:photo
           });
-        // await signOut(auth); // Signing out the user after successful registration
+        await signOut(auth); // Signing out the user after successful registration
           
     }
 
