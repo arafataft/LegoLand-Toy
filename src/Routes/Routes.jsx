@@ -3,6 +3,7 @@ import Main from "../Layouts/Main";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/login/Login";
 import Register from "../pages/Register/Register";
+import AllToys from "../pages/AllToys/AllToys";
 
 const router = createBrowserRouter([
     {
@@ -20,6 +21,11 @@ const router = createBrowserRouter([
             {
                 path:'signup',
                 element:<Register/>
+            },
+            {
+                path:'/all-toys',
+                element:<AllToys/>,
+                loader: ()=>fetch('http://localhost:3000/allToys')
             }
         ]
     }
