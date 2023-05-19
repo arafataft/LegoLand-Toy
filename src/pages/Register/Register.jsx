@@ -2,7 +2,7 @@
 import { useContext, useState } from 'react';
 import { Container, Col, Card, Form, Button } from 'react-bootstrap';
 import { AuthContext } from '../../Providers/AuthProvider';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Register = () => {
@@ -62,6 +62,7 @@ const Register = () => {
               <Form.Text className="text-danger">
                     {setError&&<p>{Error}</p>}
                 </Form.Text>
+              <p className="text-center mt-3">Already have an account? <Link to="/login">Login</Link></p>
               <Button onClick={resetForm} variant="primary" type="submit" className="d-block mx-auto mt-3">Register</Button>
             </Form>
           </Card.Body>
