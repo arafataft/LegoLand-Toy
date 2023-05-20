@@ -3,6 +3,7 @@ import Banner from "../Banner/Banner";
 import ByCategory from "../ByCategory/ByCategory";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import useTitle from "../../../Hook/useTitle";
 
 const Home = () => {
     useEffect(() => {
@@ -13,6 +14,7 @@ const Home = () => {
         });
     }, []);
 
+    useTitle('Home');
 
     return (
         <>

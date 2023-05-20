@@ -2,6 +2,7 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import useTitle from '../../Hook/useTitle';
 
 const MyToys = () => {
   const { user } = useContext(AuthContext);
@@ -11,6 +12,8 @@ const MyToys = () => {
   const [updatedPrice, setUpdatedPrice] = useState('');
   const [updatedQuantity, setUpdatedQuantity] = useState('');
   const [updatedDescription, setUpdatedDescription] = useState('');
+
+  useTitle('My Toys');
 
   const fetchToys = useCallback(async () => {
     try {

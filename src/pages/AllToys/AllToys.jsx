@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { Container, Table, Form, Modal, Button, Image } from 'react-bootstrap';
 import { AuthContext } from '../../Providers/AuthProvider';
+import useTitle from '../../Hook/useTitle';
 
 const AllToys = () => {
   const { user } = useContext(AuthContext);
@@ -10,6 +11,8 @@ const AllToys = () => {
   const [selectedToy, setSelectedToy] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const Navigate = useNavigate();
+
+  useTitle('All Toy');
 
   const toys = useLoaderData();
 

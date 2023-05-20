@@ -1,9 +1,11 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import { Card, Row, Col } from "react-bootstrap";
+import useTitle from "../../Hook/useTitle";
 
 const ViewDetails = () => {
   const allToy = useLoaderData();
   let { id } = useParams();
+  useTitle('Details')
 
   const singleToy = allToy.find((toy) => toy._id === id);
 

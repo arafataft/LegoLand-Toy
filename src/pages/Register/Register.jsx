@@ -3,6 +3,7 @@ import { useContext, useState } from 'react';
 import { Container, Col, Card, Form, Button } from 'react-bootstrap';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
+import useTitle from '../../Hook/useTitle';
 
 
 const Register = () => {
@@ -34,6 +35,8 @@ const Register = () => {
     setReset(form.reset());
   }
   const resetForm=()=>reset;
+
+  useTitle('Register');
 
   return (
     <Container fluid className="d-flex align-items-center justify-content-center vh-100">

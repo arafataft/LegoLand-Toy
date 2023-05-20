@@ -3,11 +3,14 @@ import { useForm } from 'react-hook-form';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { AuthContext } from '../../Providers/AuthProvider';
+import useTitle from '../../Hook/useTitle';
 
 const AddAToy = () => {
     const { user } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [isSubmitting, setIsSubmitting] = useState(false);
+
+    useTitle('Add Toy');
 
     const onSubmit = async (data) => {
         data.sellerName = user.displayName;

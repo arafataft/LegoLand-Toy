@@ -6,6 +6,7 @@ import { useContext, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import app from '../../firebase/firebase.config';
+import useTitle from '../../Hook/useTitle';
 
 
 const Login = () => {
@@ -17,6 +18,7 @@ const Login = () => {
 
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
+  useTitle('Login');
 
   const handleGoogleLogin = () => {
     signInWithPopup(auth, provider)
