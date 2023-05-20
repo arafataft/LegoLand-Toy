@@ -21,7 +21,7 @@ const ViewDetails = () => {
                 <Card.Text><strong>Price:</strong> {singleToy.price}</Card.Text>
                 <Card.Text><strong>Rating:</strong> {singleToy.rating}</Card.Text>
                 <Card.Text><strong>Available Quantity:</strong> {singleToy.quantity}</Card.Text>
-                {/* <Card.Text><strong>Description:</strong></Card.Text> */}
+                <Card.Text><strong>Description:</strong></Card.Text>
                 <Card.Text>{singleToy.description}</Card.Text>
               </Card.Body>
             </Card>
