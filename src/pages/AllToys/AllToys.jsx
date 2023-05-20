@@ -116,7 +116,7 @@ const AllToys = () => {
           </thead>
           <tbody>
             {filteredToys.map((toy, index) => (
-              <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#f5ffdf' : 'light' }} >
+              <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#f5ffdf' : '#f5ffda'}} >
                 <td>{index + 1}</td>
                 <td>{toy.sellerName}</td>
                 <td>{toy.name}</td>

@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 
 const Main = () => {
     return (
-        <div>
+        <div style={{ backgroundColor: '#dfdfdf'  }}>
             <MenuBar></MenuBar>
             <Outlet/>
             <Footer></Footer>

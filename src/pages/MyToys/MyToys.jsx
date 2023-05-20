@@ -104,12 +104,12 @@ const MyToys = () => {
   const sortedToys = sortAscending ? toys.sort((a, b) => a.price - b.price) : toys.sort((a, b) => b.price - a.price);
 
   return (
-    <Container>
-      <h1>My Toys</h1>
+    <Container className='my-5'>
+      <h1 className="text-center my-5">My Toys</h1>
       <div className="table-responsive">
         <Table striped bordered hover responsive>
           <thead>
-            <tr>
+            <tr style={{ backgroundColor: '#dff0e0'  }}>
               <th>Picture</th>
               <th>Name</th>
               <th>Seller Name</th>
@@ -129,8 +129,8 @@ const MyToys = () => {
             </tr>
           </thead>
           <tbody>
-            {sortedToys.map((toy) => (
-              <tr key={toy._id}>
+            {sortedToys.map((toy,index) => (
+              <tr key={toy._id} style={{ backgroundColor: index % 2 === 0 ? '#f5ffdf' : '#f5ffda' }}>
                 <td>
                   <Image src={toy.pictureUrl} alt="Toy" className="toy-image " height={95} />
                 </td>
