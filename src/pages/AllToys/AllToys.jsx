@@ -105,7 +105,7 @@ const AllToys = () => {
         <Table striped bordered hover responsive>
           <thead>
             <tr>
-              <th>No</th>
+              <th style={{ color: 'blue'}}>No</th>
               <th>Seller</th>
               <th>Toy Name</th>
               <th>Sub-category</th>
@@ -116,7 +116,7 @@ const AllToys = () => {
           </thead>
           <tbody>
             {filteredToys.map((toy, index) => (
-              <tr key={index}>
+              <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#f5ffdf' : 'light' }} >
                 <td>{index + 1}</td>
                 <td>{toy.sellerName}</td>
                 <td>{toy.name}</td>
@@ -127,7 +127,7 @@ const AllToys = () => {
                 </td>
                 <td>{toy.quantity}</td>
                 <td>
-                  <Button variant="primary" onClick={() => handleViewDetails(toy)}>
+                  <Button variant="secondary" onClick={() => handleViewDetails(toy)}>
                     View Details
                   </Button>
                 </td>
