@@ -40,7 +40,7 @@ const MenuBar = () => {
                         {user && (
                             <>
                                 <Link
-                                    to='/my-toys'
+                                    to='/myToys'
                                     className={`mx-3 text-decoration-none ${isActiveLink('/my-toys') ? 'fw-bold' : ''}`}>
                                     My Toys
                                 </Link>
