@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const ByCategory = () => {
   const [toysData, setToysData] = useState([]);
   const [selectedTab, setSelectedTab] = useState('All');
-  const { user } = useContext(AuthContext); // Replace with your actual AuthContext usage
+  const { user } = useContext(AuthContext); 
   const Navigate = useNavigate();
 
   useEffect(() => {
@@ -43,12 +43,12 @@ const ByCategory = () => {
   const handleViewDetails = (id) => {
     if (user) {
       // User is logged in, navigate to the view details page
-      Navigate(`/toy/${id}`); // Replace with your actual view details page route
+      Navigate(`/toy/${id}`); 
     } else {
       // User is not logged in, show toast notification and redirect to login page
       toast('You have to log in first to view details');
       setTimeout(() => {
-        Navigate('/login'); // Replace with your actual login page route
+        Navigate('/login'); 
       }, 3000); // Adjust the timeout as needed
     }
   };
