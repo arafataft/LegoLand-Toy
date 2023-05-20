@@ -71,8 +71,8 @@ const AllToys = () => {
   return (
     <Container className='my-5'>
       <h2 className="text-center my-5">All Toys</h2>
-      <Form.Group controlId="searchForm" className="text-center my-4" style={{ display: 'flex', alignItems: 'center' }}>
-        <Form.Label htmlFor="searchInput" srOnly>
+      <Form.Group  className="text-center my-4" style={{ display: 'flex', alignItems: 'center' }}>
+        <Form.Label htmlFor="searchInput" >
           <span className='me-4 fw-bolder'>Search</span>
         </Form.Label>
         <div style={{ width: '40%' }}>
@@ -86,6 +86,20 @@ const AllToys = () => {
           />
         </div>
       </Form.Group>
+
+      
+
+      {/* <Form.Group controlId="searchForm" className="text-center">
+        <Form.Control
+          type="text"
+          placeholder="Search by toy name"
+          value={searchTerm}
+          onChange={handleSearch}
+        />
+      </Form.Group> */}
+
+
+
 
       <div className="table-responsive">
         <Table striped bordered hover responsive>
