@@ -1,40 +1,167 @@
-import  { useState } from 'react';
-import { Tab, Nav } from 'react-bootstrap';
+import { useState, useEffect, useContext } from 'react';
+import { Nav, NavItem, NavLink, TabContent, TabPane, Card, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../Providers/AuthProvider';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ByCategory = () => {
-  const [selectedTab, setSelectedTab] = useState('Math Toys');
+  const [toysData, setToysData] = useState([]);
+  const [selectedTab, setSelectedTab] = useState('All');
+  const { user } = useContext(AuthContext); // Replace with your actual AuthContext usage
+  const Navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchToys = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/allToys');
+        if (response.ok) {
+          const data = await response.json();
+          setToysData(data);
+        } else {
+          console.log('Error fetching toys');
+        }
+      } catch (error) {
+        console.log('Error:', error);
+      }
+    };
+
+    fetchToys();
+  }, []);
+
+  useEffect(() => {
+    // Select the "All" tab by default if no category is selected
+    if (selectedTab === 'All') {
+      setSelectedTab('All');
+    }
+  }, [selectedTab]);
 
   const handleTabClick = (category) => {
     setSelectedTab(category);
   };
 
+  const handleViewDetails = (id) => {
+    if (user) {
+      // User is logged in, navigate to the view details page
+      Navigate(`/toy/${id}`); // Replace with your actual view details page route
+    } else {
+      // User is not logged in, show toast notification and redirect to login page
+      toast('You have to log in first to view details');
+      setTimeout(() => {
+        Navigate('/login'); // Replace with your actual login page route
+      }, 3000); // Adjust the timeout as needed
+    }
+  };
+
+  // Filter the toysData based on the selected tab/category
+  const filteredToys = selectedTab === 'All' ? toysData : toysData.filter((toy) => toy.subCategory === selectedTab);
+
   return (
     <div>
-      <Tab.Container activeKey={selectedTab}>
-        <Nav variant="tabs" onSelect={handleTabClick}>
-          <Nav.Item>
-            <Nav.Link eventKey="Math Toys">Math Toys</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="Language Toys">Language Toys</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="Engineering Toys">Engineering Toys</Nav.Link>
-          </Nav.Item>
-        </Nav>
+      <Nav variant="tabs">
+        <NavItem>
+          <NavLink active={selectedTab === 'All'} onClick={() => handleTabClick('All')}>
+            All
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink active={selectedTab === 'Math Toys'} onClick={() => handleTabClick('Math Toys')}>
+            Math Toys
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink active={selectedTab === 'Language Toys'} onClick={() => handleTabClick('Language Toys')}>
+            Language Toys
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink active={selectedTab === 'Engineering Toys'} onClick={() => handleTabClick('Engineering Toys')}>
+            Engineering Toys
+          </NavLink>
+        </NavItem>
+      </Nav>
 
-        <Tab.Content>
-          <Tab.Pane eventKey="Math Toys">
-            {/* Render toys for Math Toys category */}
-          </Tab.Pane>
-          <Tab.Pane eventKey="Language Toys">
-            {/* Render toys for Language Toys category */}
-          </Tab.Pane>
-          <Tab.Pane eventKey="Engineering Toys">
-            {/* Render toys for Engineering Toys category */}
-          </Tab.Pane>
-        </Tab.Content>
-      </Tab.Container>
+      <TabContent>
+        <TabPane eventKey="All" className={selectedTab === 'All' ? 'show active' : ''}>
+          <div className="row">
+            {filteredToys.map((toy) => (
+              <div key={toy._id} className="col-lg-4 col-sm-12 mb-4">
+                <Card>
+                  <Card.Img variant="top" src={toy.pictureUrl} alt={toy.name} />
+                  <Card.Body>
+                    <Card.Title>{toy.name}</Card.Title>
+                    <Card.Text>Price: ${toy.price}</Card.Text>
+                    <Card.Text>Rating: {toy.rating}</Card.Text>
+                    <Button variant="primary" onClick={()=>handleViewDetails(toy._id)}>
+                      View Details
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </div>
+            ))}
+          </div>
+        </TabPane>
+
+        <TabPane eventKey="Math Toys" className={selectedTab === 'Math Toys' ? 'show active' : ''}>
+          <div className="row">
+            {filteredToys.map((toy) => (
+              <div key={toy._id} className="col-lg-4 col-sm-12 mb-4">
+                <Card>
+                  <Card.Img variant="top" src={toy.pictureUrl} alt={toy.name} />
+                  <Card.Body>
+                    <Card.Title>{toy.name}</Card.Title>
+                    <Card.Text>Price: ${toy.price}</Card.Text>
+                    <Card.Text>Rating: {toy.rating}</Card.Text>
+                    <Button variant="primary" onClick={handleViewDetails}>
+                      View Details
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </div>
+            ))}
+          </div>
+        </TabPane>
+
+        <TabPane eventKey="Language Toys" className={selectedTab === 'Language Toys' ? 'show active' : ''}>
+          <div className="row">
+            {filteredToys.map((toy) => (
+              <div key={toy._id} className="col-lg-4 col-sm-12 mb-4">
+                <Card>
+                  <Card.Img variant="top" src={toy.pictureUrl} alt={toy.name} />
+                  <Card.Body>
+                    <Card.Title>{toy.name}</Card.Title>
+                    <Card.Text>Price: ${toy.price}</Card.Text>
+                    <Card.Text>Rating: {toy.rating}</Card.Text>
+                    <Button variant="primary" onClick={handleViewDetails}>
+                      View Details
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </div>
+            ))}
+          </div>
+        </TabPane>
+
+        <TabPane eventKey="Engineering Toys" className={selectedTab === 'Engineering Toys' ? 'show active' : ''}>
+          <div className="row">
+            {filteredToys.map((toy) => (
+              <div key={toy._id} className="col-lg-4 col-sm-12 mb-4">
+                <Card>
+                  <Card.Img variant="top" src={toy.pictureUrl} alt={toy.name} />
+                  <Card.Body>
+                    <Card.Title>{toy.name}</Card.Title>
+                    <Card.Text>Price: ${toy.price}</Card.Text>
+                    <Card.Text>Rating: {toy.rating}</Card.Text>
+                    <Button variant="primary" onClick={handleViewDetails}>
+                      View Details
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </div>
+            ))}
+          </div>
+        </TabPane>
+      </TabContent>
     </div>
   );
 };
