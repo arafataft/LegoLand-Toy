@@ -14,7 +14,7 @@ const ByCategory = () => {
   useEffect(() => {
     const fetchToys = async () => {
       try {
-        const response = await fetch('http://localhost:3000/allToys');
+        const response = await fetch('http://localhost:3000/allToy');
         if (response.ok) {
           const data = await response.json();
           setToysData(data);
