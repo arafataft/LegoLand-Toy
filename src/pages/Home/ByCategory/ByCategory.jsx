@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
-import { Nav, NavItem, NavLink, TabContent, TabPane, Card, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Nav, NavItem, NavLink, TabContent, TabPane, Card, Button, Spinner } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,8 +9,8 @@ const ByCategory = () => {
   const [toysData, setToysData] = useState([]);
   const [selectedTab, setSelectedTab] = useState('All');
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
   const [displayedToys, setDisplayedToys] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchToys = async () => {
@@ -19,6 +19,7 @@ const ByCategory = () => {
         if (response.ok) {
           const data = await response.json();
           setToysData(data);
+          setLoading(false);
         } else {
           console.log('Error fetching toys');
         }
@@ -26,7 +27,6 @@ const ByCategory = () => {
         console.log('Error:', error);
       }
     };
-
     fetchToys();
   }, []);
 
@@ -40,29 +40,28 @@ const ByCategory = () => {
   useEffect(() => {
     // Set the displayed toys based on the selected tab and limit to 5 initially
     const filteredToys = selectedTab === 'All' ? toysData : toysData.filter((toy) => toy.subCategory === selectedTab);
-    setDisplayedToys(filteredToys.slice(0, 5));
+    setDisplayedToys(filteredToys.slice(0, 3));
   }, [selectedTab, toysData]);
 
   const handleTabClick = (category) => {
     setSelectedTab(category);
   };
+  
+  if (loading) {
+    return <Spinner animation="border" role="status" className="d-block mx-auto my-5"><span className="sr-only"></span></Spinner>;
+  }
 
-  const handleViewDetails = (id) => {
-    if (user) {
-      // User is logged in, navigate to the view details page
-      navigate(`/toy/${id}`);
-    } else {
+  const handleViewDetails = () => {
+    if (!user) {
       // User is not logged in, show toast notification and redirect to login page
       toast('You have to log in first to view details');
-      setTimeout(() => {
-        navigate('/login');
-      }, 3000);
-    }
+      
+    } 
   };
 
   const handleSeeMore = () => {
     const filteredToys = selectedTab === 'All' ? toysData : toysData.filter((toy) => toy.subCategory === selectedTab);
-    const nextBatch = filteredToys.slice(displayedToys.length, displayedToys.length + 5);
+    const nextBatch = filteredToys.slice(displayedToys.length, displayedToys.length + 3);
     setDisplayedToys((prevToys) => [...prevToys, ...nextBatch]);
   };
 
@@ -105,16 +104,16 @@ const ByCategory = () => {
                       <Card.Title>{toy.name}</Card.Title>
                       <Card.Text>Price: ${toy.price}</Card.Text>
                       <Card.Text>Rating: {toy.rating}</Card.Text>
-                      <Button variant="info" onClick={() => handleViewDetails(toy._id)}>
+                      <Link to={`/toy/${toy._id}`}><Button variant="info" onClick={() => handleViewDetails()}>
                         View Details
-                      </Button>
+                      </Button></Link>
                     </Card.Body>
                   </Card>
                 </div>
               ))}
             </div>
 
-            {selectedTab === 'All' && displayedToys.length > 4 && displayedToys.length < toysData.length && (
+            {selectedTab === 'All' && displayedToys.length > 2 && displayedToys.length < toysData.length && (
               <div className="text-center mt-4">
                 <Button variant="info" onClick={handleSeeMore}>
                   See More
@@ -138,16 +137,16 @@ const ByCategory = () => {
                       <Card.Title>{toy.name}</Card.Title>
                       <Card.Text>Price: ${toy.price}</Card.Text>
                       <Card.Text>Rating: {toy.rating}</Card.Text>
-                      <Button variant="info" onClick={() => handleViewDetails(toy._id)}>
+                      <Link to={`/toy/${toy._id}`}><Button variant="info" onClick={() => handleViewDetails()}>
                         View Details
-                      </Button>
+                      </Button></Link>
                     </Card.Body>
                   </Card>
                 </div>
               ))}
             </div>
 
-            {selectedTab === 'LEGO City' && displayedToys.length > 4 && displayedToys.length < toysData.length && (
+            {selectedTab === 'LEGO City' && displayedToys.length > 2 && displayedToys.length < toysData.length && (
               <div className="text-center mt-4">
                 <Button variant="info" onClick={handleSeeMore}>
                   See More
@@ -171,16 +170,16 @@ const ByCategory = () => {
                       <Card.Title>{toy.name}</Card.Title>
                       <Card.Text>Price: ${toy.price}</Card.Text>
                       <Card.Text>Rating: {toy.rating}</Card.Text>
-                      <Button variant="info" onClick={() => handleViewDetails(toy._id)}>
+                      <Link to={`/toy/${toy._id}`}><Button variant="info" onClick={() => handleViewDetails()}>
                         View Details
-                      </Button>
+                      </Button></Link>
                     </Card.Body>
                   </Card>
                 </div>
               ))}
             </div>
 
-            {selectedTab === 'LEGO Star Wars' && displayedToys.length > 4 && displayedToys.length < toysData.length && (
+            {selectedTab === 'LEGO Star Wars' && displayedToys.length > 2 && displayedToys.length < toysData.length && (
               <div className="text-center mt-4">
                 <Button variant="info" onClick={handleSeeMore}>
                   See More
@@ -204,16 +203,16 @@ const ByCategory = () => {
                       <Card.Title>{toy.name}</Card.Title>
                       <Card.Text>Price: ${toy.price}</Card.Text>
                       <Card.Text>Rating: {toy.rating}</Card.Text>
-                      <Button variant="info" onClick={() => handleViewDetails(toy._id)}>
+                      <Link to={`/toy/${toy._id}`}><Button variant="info" onClick={() => handleViewDetails()}>
                         View Details
-                      </Button>
+                      </Button></Link>
                     </Card.Body>
                   </Card>
                 </div>
               ))}
             </div>
 
-            {selectedTab === 'LEGO Architecture' && displayedToys.length > 4 && displayedToys.length < toysData.length && (
+            {selectedTab === 'LEGO Architecture' && displayedToys.length > 2 && displayedToys.length < toysData.length && (
               <div className="text-center mt-4">
                 <Button variant="info" onClick={handleSeeMore}>
                   See More
