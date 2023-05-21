@@ -18,9 +18,7 @@ const MenuBar = () => {
         <div>
             <Navbar className='container p-2' expand='sm'>
                 <Navbar.Brand>
-                    <Link to='/' className='mx-3 text-black text-decoration-none fw-bolder'>
-                        LegoLand Toys
-                    </Link>
+                <Link to='/'><img src="/logo.png" alt="LegoLand Toy" className='img-fluid' style={{ height: '50px', width: 'auto' }} /></Link>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls='basic-navbar-nav' />
                 <Navbar.Collapse id='basic-navbar-nav'>
@@ -61,16 +59,17 @@ const MenuBar = () => {
                     </Nav>
                     {user ? (
                         <div className='d-flex'>
-                            <div data-toggle='tooltip' title={user.displayName}>
-                                <Image src={user?.photoURL || 'https://picsum.photos/200'} roundedCircle height={25} />
-                            </div>
-                            <Button onClick={handleLogout} variant='secondary' className='ms-1'>
+                            
+                            <Button onClick={handleLogout} variant='secondary' className='me-1 btn-sm'>
                                 Logout
                             </Button>
+                            <div data-toggle='tooltip' title={user.displayName}>
+                                <Image src={user?.photoURL || 'https://picsum.photos/200'} roundedCircle height={35} />
+                            </div>
                         </div>
                     ) : (
                         <Link to='/login'>
-                            <Button variant='secondary'>Login</Button>
+                            <Button variant='secondary' size='sm'>Login</Button>
                         </Link>
                     )}
                 </Navbar.Collapse>
