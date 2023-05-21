@@ -9,6 +9,7 @@ import MyToys from "../pages/MyToys/MyToys";
 import ViewDetails from "../pages/ViewDetails/ViewDetails";
 import Blog from "../pages/Blog/Blog";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -34,15 +35,15 @@ const router = createBrowserRouter([
             },
             {
                 path:'/add-toy',
-                element:<AddAToy/> 
+                element:<PrivateRoute><AddAToy/></PrivateRoute> 
             },
             {
                 path:'/myToys',
-                element:<MyToys/> 
+                element:<PrivateRoute><MyToys/></PrivateRoute> 
             },
             {
                 path:'/toy/:id',
-                element:<ViewDetails/>,
+                element:<PrivateRoute><ViewDetails/></PrivateRoute>,
                 loader: ()=>fetch('http://localhost:3000/allToy')
             },
             {
