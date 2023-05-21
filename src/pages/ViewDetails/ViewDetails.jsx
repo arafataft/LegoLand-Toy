@@ -10,12 +10,12 @@ const ViewDetails = () => {
   const singleToy = allToy.find((toy) => toy._id === id);
 
   return (
-    <div>
+    <div className="my-5">
       {singleToy && (
         <Row className="justify-content-center">
           <Col md={6}>
             <Card>
-              <Card.Img variant="top" src={singleToy.pictureUrl} alt={singleToy.toyName} fluid />
+              <Card.Img variant="top" src={singleToy.pictureUrl} alt={singleToy.toyName} fluid='true' />
               <Card.Body className="text-center">
                 <Card.Title className="font-weight-bold">{singleToy.toyName}</Card.Title>
                 <Card.Text><strong>Seller:</strong> {singleToy.sellerName}</Card.Text>
