@@ -1,7 +1,9 @@
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import './Blog.css';
+import useTitle from '../../Hook/useTitle';
 
 const Blog = () => {
+  useTitle('Blog');
   const blogPosts = [
     {
       id: 1,
