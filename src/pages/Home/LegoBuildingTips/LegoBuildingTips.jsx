@@ -42,7 +42,7 @@ const LegoBuildingTips = () => {
         <Row className="justify-content-center">
           {buildingTips.map((tip) => (
             <Col key={tip.id} xs={12} md={6} lg={4} className="mb-4 d-flex" >
-              <div className="building-tip-card w-100 shadow rounded p-4" style={{ backgroundColor: '#f5f5e0'}}>
+              <div className="building-tip-card w-100 shadow rounded p-4" style={{ backgroundColor: '#e1eaea'}}>
                 <h3 className="tip-title">{tip.title}</h3>
                 <hr />
                 <p className="tip-description">{tip.description}</p>
