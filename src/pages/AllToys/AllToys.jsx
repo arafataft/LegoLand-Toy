@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Container, Table, Form, Modal, Button, Image } from 'react-bootstrap';
 import { AuthContext } from '../../Providers/AuthProvider';
 import useTitle from '../../Hook/useTitle';
@@ -11,7 +11,8 @@ const AllToys = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [selectedToy, setSelectedToy] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useTitle('All Toys');
 
@@ -31,7 +32,11 @@ const AllToys = () => {
       setSelectedToy(toy);
       setShowModal(true);
     } else {
-      Navigate('/login');
+      navigate('/login', {
+        state: {
+          from: location
+        }
+      });
     }
   };
 
@@ -68,11 +73,20 @@ const AllToys = () => {
     toy.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  useEffect(() => {
+    // Restore previous state if available after login
+    if (location.state && location.state.from === '/login') {
+      const { searchTerm, currentPage } = location.state;
+      setSearchTerm(searchTerm);
+      setCurrentPage(currentPage);
+    }
+  }, [location.state]);
+
   return (
     <Container className='my-5'>
       <h2 className="text-center my-5">All Toys</h2>
-      <Form.Group  className="text-center my-4" style={{ display: 'flex', alignItems: 'center' }}>
-        <Form.Label htmlFor="searchInput" >
+      <Form.Group className="text-center my-4" style={{ display: 'flex', alignItems: 'center' }}>
+        <Form.Label htmlFor="searchInput">
           <span className='me-4 fw-bolder'>Search</span>
         </Form.Label>
         <div style={{ width: '40%' }}>
@@ -87,25 +101,11 @@ const AllToys = () => {
         </div>
       </Form.Group>
 
-      
-
-      {/* <Form.Group controlId="searchForm" className="text-center">
-        <Form.Control
-          type="text"
-          placeholder="Search by toy name"
-          value={searchTerm}
-          onChange={handleSearch}
-        />
-      </Form.Group> */}
-
-
-
-
       <div className="table-responsive">
         <Table striped bordered hover responsive>
           <thead>
             <tr>
-              <th style={{ color: 'blue'}}>No</th>
+              <th style={{ color: 'blue' }}>No</th>
               <th>Seller</th>
               <th>Toy Name</th>
               <th>Sub-category</th>
@@ -116,7 +116,7 @@ const AllToys = () => {
           </thead>
           <tbody>
             {filteredToys.map((toy, index) => (
-              <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#f5ffdf' : '#f5ffda'}} >
+              <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#f5ffdf' : '#f5ffda' }}>
                 <td>{index + 1}</td>
                 <td>{toy.sellerName}</td>
                 <td>{toy.name}</td>
@@ -133,7 +133,6 @@ const AllToys = () => {
                 </td>
               </tr>
             ))}
-
           </tbody>
         </Table>
       </div>
