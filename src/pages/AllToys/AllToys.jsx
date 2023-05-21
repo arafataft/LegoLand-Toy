@@ -1,16 +1,16 @@
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { Container, Table, Form, Modal, Button, Image } from 'react-bootstrap';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { Container, Table, Form, Button } from 'react-bootstrap';
 import { AuthContext } from '../../Providers/AuthProvider';
 import useTitle from '../../Hook/useTitle';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AllToys = () => {
   const { user } = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [selectedToy, setSelectedToy] = useState(null);
-  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -27,21 +27,12 @@ const AllToys = () => {
     setCurrentPage(page);
   };
 
-  const handleViewDetails = (toy) => {
-    if (user) {
-      setSelectedToy(toy);
-      setShowModal(true);
-    } else {
-      navigate('/login', {
-        state: {
-          from: location
-        }
-      });
-    }
-  };
-
-  const handleModalClose = () => {
-    setShowModal(false);
+  const handleViewDetails = () => {
+    if (!user) {
+      // User is not logged in, show toast notification and redirect to login page
+      toast('You have to log in first to view details');
+      navigate('/login', { state: { searchTerm, currentPage } });
+    } 
   };
 
   const fetchToys = async () => {
@@ -55,7 +46,6 @@ const AllToys = () => {
       return [];
     }
   };
-
 
   // Load toys when the component mounts or the current page or search term changes
   useEffect(() => {
@@ -127,9 +117,11 @@ const AllToys = () => {
                 </td>
                 <td>{toy.quantity}</td>
                 <td>
-                  <Button variant="secondary" onClick={() => handleViewDetails(toy)}>
-                    View Details
-                  </Button>
+                  <Link to={`/toy/${toy._id}`}>
+                    <Button variant="info" onClick={() => handleViewDetails()}>
+                      View Details
+                    </Button>
+                  </Link>
                 </td>
               </tr>
             ))}
@@ -149,31 +141,6 @@ const AllToys = () => {
           </Button>
         ))}
       </div>
-
-      {/* Toy Details Modal */}
-      {selectedToy && (
-        <Modal show={showModal} onHide={handleModalClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Toy Details</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Image src={selectedToy.pictureUrl} alt="Toy" fluid rounded />
-            <p><strong>Toy Name:</strong> {selectedToy.name}</p>
-            <p><strong>Seller Name:</strong> {selectedToy.sellerName}</p>
-            <p><strong>Seller Email:</strong> {selectedToy.sellerEmail}</p>
-            <p><strong>Price:</strong> ${selectedToy.price}</p>
-            <p><strong>Rating:</strong> {selectedToy.rating}</p>
-            <p><strong>Available Quantity:</strong> {selectedToy.quantity}</p>
-            <p><strong>Detail Description:</strong> </p>
-            <p>{selectedToy.description}</p>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleModalClose}>
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      )}
     </Container>
   );
 };

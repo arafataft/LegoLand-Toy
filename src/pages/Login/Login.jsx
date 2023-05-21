@@ -7,6 +7,8 @@ import { AuthContext } from '../../Providers/AuthProvider';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import app from '../../firebase/firebase.config';
 import useTitle from '../../Hook/useTitle';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Login = () => {
@@ -25,6 +27,7 @@ const Login = () => {
       .then(() => {
         navigate(from);
         setError(null);
+        toast("Login Success");
       })
       .catch(error => console.error(error.message))
   }
@@ -39,7 +42,8 @@ const Login = () => {
     signIn(email, password)
       .then(() => {
         navigate(from);
-        setError('')
+        setError('');
+        toast("Login Success");
       })
       .catch(error => {
         if (error.code === "auth/user-not-found") {
