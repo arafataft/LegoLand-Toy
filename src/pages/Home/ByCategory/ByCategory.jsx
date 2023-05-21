@@ -8,8 +8,9 @@ import 'react-toastify/dist/ReactToastify.css';
 const ByCategory = () => {
   const [toysData, setToysData] = useState([]);
   const [selectedTab, setSelectedTab] = useState('All');
-  const { user } = useContext(AuthContext); 
-  const Navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [displayedToys, setDisplayedToys] = useState([]);
 
   useEffect(() => {
     const fetchToys = async () => {
@@ -36,6 +37,12 @@ const ByCategory = () => {
     }
   }, [selectedTab]);
 
+  useEffect(() => {
+    // Set the displayed toys based on the selected tab and limit to 5 initially
+    const filteredToys = selectedTab === 'All' ? toysData : toysData.filter((toy) => toy.subCategory === selectedTab);
+    setDisplayedToys(filteredToys.slice(0, 5));
+  }, [selectedTab, toysData]);
+
   const handleTabClick = (category) => {
     setSelectedTab(category);
   };
@@ -43,22 +50,25 @@ const ByCategory = () => {
   const handleViewDetails = (id) => {
     if (user) {
       // User is logged in, navigate to the view details page
-      Navigate(`/toy/${id}`); 
+      navigate(`/toy/${id}`);
     } else {
       // User is not logged in, show toast notification and redirect to login page
       toast('You have to log in first to view details');
       setTimeout(() => {
-        Navigate('/login'); 
-      }, 3000); // Adjust the timeout as needed
+        navigate('/login');
+      }, 3000);
     }
   };
 
-  // Filter the toysData based on the selected tab/category
-  const filteredToys = selectedTab === 'All' ? toysData : toysData.filter((toy) => toy.subCategory === selectedTab);
+  const handleSeeMore = () => {
+    const filteredToys = selectedTab === 'All' ? toysData : toysData.filter((toy) => toy.subCategory === selectedTab);
+    const nextBatch = filteredToys.slice(displayedToys.length, displayedToys.length + 5);
+    setDisplayedToys((prevToys) => [...prevToys, ...nextBatch]);
+  };
 
   return (
-    <div>
-      <Nav variant="tabs">
+    <div className='container my-5'>
+      <Nav variant="tabs" className='pt-5'>
         <NavItem>
           <NavLink active={selectedTab === 'All'} onClick={() => handleTabClick('All')}>
             All
@@ -81,84 +91,136 @@ const ByCategory = () => {
         </NavItem>
       </Nav>
 
-      <TabContent>
-        <TabPane eventKey="All" className={selectedTab === 'All' ? 'show active' : ''}>
-          <div className="row">
-            {filteredToys.map((toy) => (
-              <div key={toy._id} className="col-lg-4 col-sm-12 mb-4">
-                <Card>
-                  <Card.Img variant="top" src={toy.pictureUrl} alt={toy.name} />
-                  <Card.Body>
-                    <Card.Title>{toy.name}</Card.Title>
-                    <Card.Text>Price: ${toy.price}</Card.Text>
-                    <Card.Text>Rating: {toy.rating}</Card.Text>
-                    <Button variant="primary" onClick={()=>handleViewDetails(toy._id)}>
-                      View Details
-                    </Button>
-                  </Card.Body>
-                </Card>
+      <TabContent className='mt-4'>
+        <TabPane eventKey='All' className={selectedTab === 'All' ? 'show active' : ''}>
+          <div className="container">
+            <div className="row">
+              {displayedToys.map((toy) => (
+                <div key={toy._id} className="col-lg-4 col-sm-12 mb-4">
+                  <Card>
+                    <div style={{ height: '200px', overflow: 'hidden' }}>
+                      <Card.Img src={toy.pictureUrl} alt={toy.name} style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
+                    </div>
+                    <Card.Body>
+                      <Card.Title>{toy.name}</Card.Title>
+                      <Card.Text>Price: ${toy.price}</Card.Text>
+                      <Card.Text>Rating: {toy.rating}</Card.Text>
+                      <Button variant="info" onClick={() => handleViewDetails(toy._id)}>
+                        View Details
+                      </Button>
+                    </Card.Body>
+                  </Card>
+                </div>
+              ))}
+            </div>
+
+            {selectedTab === 'All' && displayedToys.length > 4 && displayedToys.length < toysData.length && (
+              <div className="text-center mt-4">
+                <Button variant="info" onClick={handleSeeMore}>
+                  See More
+                </Button>
               </div>
-            ))}
+            )}
+
           </div>
         </TabPane>
 
-        <TabPane eventKey="LEGO City" className={selectedTab === 'LEGO City' ? 'show active' : ''}>
-          <div className="row">
-            {filteredToys.map((toy) => (
-              <div key={toy._id} className="col-lg-4 col-sm-12 mb-4">
-                <Card>
-                  <Card.Img variant="top" src={toy.pictureUrl} alt={toy.name} />
-                  <Card.Body>
-                    <Card.Title>{toy.name}</Card.Title>
-                    <Card.Text>Price: ${toy.price}</Card.Text>
-                    <Card.Text>Rating: {toy.rating}</Card.Text>
-                    <Button variant="primary" onClick={handleViewDetails}>
-                      View Details
-                    </Button>
-                  </Card.Body>
-                </Card>
+        <TabPane eventKey='LEGO City' className={selectedTab === 'LEGO City' ? 'show active' : ''}>
+          <div className="container">
+            <div className="row">
+              {displayedToys.map((toy) => (
+                <div key={toy._id} className="col-lg-4 col-sm-12 mb-4">
+                  <Card>
+                    <div style={{ height: '200px', overflow: 'hidden' }}>
+                      <Card.Img src={toy.pictureUrl} alt={toy.name} style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
+                    </div>
+                    <Card.Body>
+                      <Card.Title>{toy.name}</Card.Title>
+                      <Card.Text>Price: ${toy.price}</Card.Text>
+                      <Card.Text>Rating: {toy.rating}</Card.Text>
+                      <Button variant="info" onClick={() => handleViewDetails(toy._id)}>
+                        View Details
+                      </Button>
+                    </Card.Body>
+                  </Card>
+                </div>
+              ))}
+            </div>
+
+            {selectedTab === 'LEGO City' && displayedToys.length > 4 && displayedToys.length < toysData.length && (
+              <div className="text-center mt-4">
+                <Button variant="info" onClick={handleSeeMore}>
+                  See More
+                </Button>
               </div>
-            ))}
+            )}
+
           </div>
         </TabPane>
 
-        <TabPane eventKey="LEGO Star Wars" className={selectedTab === 'LEGO Star Wars' ? 'show active' : ''}>
-          <div className="row">
-            {filteredToys.map((toy) => (
-              <div key={toy._id} className="col-lg-4 col-sm-12 mb-4">
-                <Card>
-                  <Card.Img variant="top" src={toy.pictureUrl} alt={toy.name} />
-                  <Card.Body>
-                    <Card.Title>{toy.name}</Card.Title>
-                    <Card.Text>Price: ${toy.price}</Card.Text>
-                    <Card.Text>Rating: {toy.rating}</Card.Text>
-                    <Button variant="primary" onClick={handleViewDetails}>
-                      View Details
-                    </Button>
-                  </Card.Body>
-                </Card>
+        <TabPane eventKey='LEGO Star Wars' className={selectedTab === 'LEGO Star Wars' ? 'show active' : ''}>
+          <div className="container">
+            <div className="row">
+              {displayedToys.map((toy) => (
+                <div key={toy._id} className="col-lg-4 col-sm-12 mb-4">
+                  <Card>
+                    <div style={{ height: '200px', overflow: 'hidden' }}>
+                      <Card.Img src={toy.pictureUrl} alt={toy.name} style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
+                    </div>
+                    <Card.Body>
+                      <Card.Title>{toy.name}</Card.Title>
+                      <Card.Text>Price: ${toy.price}</Card.Text>
+                      <Card.Text>Rating: {toy.rating}</Card.Text>
+                      <Button variant="info" onClick={() => handleViewDetails(toy._id)}>
+                        View Details
+                      </Button>
+                    </Card.Body>
+                  </Card>
+                </div>
+              ))}
+            </div>
+
+            {selectedTab === 'LEGO Star Wars' && displayedToys.length > 4 && displayedToys.length < toysData.length && (
+              <div className="text-center mt-4">
+                <Button variant="info" onClick={handleSeeMore}>
+                  See More
+                </Button>
               </div>
-            ))}
+            )}
+
           </div>
         </TabPane>
 
-        <TabPane eventKey="LEGO Architecture" className={selectedTab === 'LEGO Architecture' ? 'show active' : ''}>
-          <div className="row">
-            {filteredToys.map((toy) => (
-              <div key={toy._id} className="col-lg-4 col-sm-12 mb-4">
-                <Card>
-                  <Card.Img variant="top" src={toy.pictureUrl} alt={toy.name} />
-                  <Card.Body>
-                    <Card.Title>{toy.name}</Card.Title>
-                    <Card.Text>Price: ${toy.price}</Card.Text>
-                    <Card.Text>Rating: {toy.rating}</Card.Text>
-                    <Button variant="primary" onClick={handleViewDetails}>
-                      View Details
-                    </Button>
-                  </Card.Body>
-                </Card>
+        <TabPane eventKey='LEGO Architecture' className={selectedTab === 'LEGO Architecture' ? 'show active' : ''}>
+          <div className="container">
+            <div className="row">
+              {displayedToys.map((toy) => (
+                <div key={toy._id} className="col-lg-4 col-sm-12 mb-4">
+                  <Card>
+                    <div style={{ height: '200px', overflow: 'hidden' }}>
+                      <Card.Img src={toy.pictureUrl} alt={toy.name} style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
+                    </div>
+                    <Card.Body>
+                      <Card.Title>{toy.name}</Card.Title>
+                      <Card.Text>Price: ${toy.price}</Card.Text>
+                      <Card.Text>Rating: {toy.rating}</Card.Text>
+                      <Button variant="info" onClick={() => handleViewDetails(toy._id)}>
+                        View Details
+                      </Button>
+                    </Card.Body>
+                  </Card>
+                </div>
+              ))}
+            </div>
+
+            {selectedTab === 'LEGO Architecture' && displayedToys.length > 4 && displayedToys.length < toysData.length && (
+              <div className="text-center mt-4">
+                <Button variant="info" onClick={handleSeeMore}>
+                  See More
+                </Button>
               </div>
-            ))}
+            )}
+
           </div>
         </TabPane>
       </TabContent>
