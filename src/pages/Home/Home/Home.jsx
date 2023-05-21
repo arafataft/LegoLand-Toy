@@ -4,6 +4,7 @@ import ByCategory from "../ByCategory/ByCategory";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import useTitle from "../../../Hook/useTitle";
+import Gallery from "../Gallery/Gallery";
 
 const Home = () => {
     useEffect(() => {
@@ -20,6 +21,9 @@ const Home = () => {
         <>
             <div data-aos="fade-up">
             <Banner />
+            </div>
+            <div data-aos="fade-up">
+            <Gallery />
             </div>
             <div data-aos="fade-up">
             <ByCategory />
