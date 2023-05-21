@@ -36,15 +36,16 @@ const LegoBuildingTips = () => {
   ];
 
   return (
-    <div style={{ backgroundColor: '#f5f5f5', padding: '40px 0' }}>
+    <div className="lego-building-tips-section py-5 my-5" style={{ backgroundColor: '#cccccc' }}>
       <Container>
-        <h2 style={{ textAlign: 'center', fontSize: '36px', fontWeight: '700', marginBottom: '30px' }}>Lego Building Tips</h2>
-        <Row>
+        <h2 className="section-title text-center">Lego Building Tips</h2>
+        <Row className="justify-content-center">
           {buildingTips.map((tip) => (
-            <Col key={tip.id} sm={12} md={6} lg={4} className="mb-4">
-              <div style={{ backgroundColor: '#ffffff', padding: '20px', borderRadius: '5px', boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)', transition: 'transform 0.3s ease-in-out' }}>
-                <h3 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '10px' }}>{tip.title}</h3>
-                <p style={{ fontSize: '16px', color: '#555555' }}>{tip.description}</p>
+            <Col key={tip.id} xs={12} md={6} lg={4} className="mb-4 d-flex" >
+              <div className="building-tip-card w-100 shadow rounded p-4" style={{ backgroundColor: '#f5f5e0'}}>
+                <h3 className="tip-title">{tip.title}</h3>
+                <hr />
+                <p className="tip-description">{tip.description}</p>
               </div>
             </Col>
           ))}
