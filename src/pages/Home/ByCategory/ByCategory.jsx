@@ -97,7 +97,7 @@ const ByCategory = () => {
             <div className="row">
               {displayedToys.map((toy) => (
                 <div key={toy._id} className="col-lg-4 col-sm-12 mb-4">
-                  <Card>
+                  <Card style={{ height: '100%' }}>
                     <div style={{ height: '200px', overflow: 'hidden' }}>
                       <Card.Img src={toy.pictureUrl} alt={toy.name} style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                     </div>
@@ -130,7 +130,7 @@ const ByCategory = () => {
             <div className="row">
               {displayedToys.map((toy) => (
                 <div key={toy._id} className="col-lg-4 col-sm-12 mb-4">
-                  <Card>
+                  <Card style={{ height: '100%' }}>
                     <div style={{ height: '200px', overflow: 'hidden' }}>
                       <Card.Img src={toy.pictureUrl} alt={toy.name} style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                     </div>
@@ -163,7 +163,7 @@ const ByCategory = () => {
             <div className="row">
               {displayedToys.map((toy) => (
                 <div key={toy._id} className="col-lg-4 col-sm-12 mb-4">
-                  <Card>
+                  <Card style={{ height: '100%' }}>
                     <div style={{ height: '200px', overflow: 'hidden' }}>
                       <Card.Img src={toy.pictureUrl} alt={toy.name} style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                     </div>
@@ -196,7 +196,7 @@ const ByCategory = () => {
             <div className="row">
               {displayedToys.map((toy) => (
                 <div key={toy._id} className="col-lg-4 col-sm-12 mb-4">
-                  <Card>
+                  <Card style={{ height: '100%' }}>
                     <div style={{ height: '200px', overflow: 'hidden' }}>
                       <Card.Img src={toy.pictureUrl} alt={toy.name} style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                     </div>
