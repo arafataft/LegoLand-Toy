@@ -5,6 +5,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import useTitle from "../../../Hook/useTitle";
 import Gallery from "../Gallery/Gallery";
+import LegoBuildingTips from "../LegoBuildingTips/LegoBuildingTips";
 
 const Home = () => {
     useEffect(() => {
@@ -27,6 +28,9 @@ const Home = () => {
             </div>
             <div data-aos="fade-up">
             <ByCategory />
+            </div>
+            <div data-aos="fade-up">
+            <LegoBuildingTips />
             </div>
             
             
