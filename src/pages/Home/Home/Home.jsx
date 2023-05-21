@@ -7,6 +7,7 @@ import useTitle from "../../../Hook/useTitle";
 import Gallery from "../Gallery/Gallery";
 import LegoBuildingTips from "../LegoBuildingTips/LegoBuildingTips";
 import LegoYouTube from "../LegoYouTube/LegoYouTube";
+import AboutUs from "../AboutUs/AboutUs";
 
 const Home = () => {
     useEffect(() => {
@@ -34,6 +35,7 @@ const Home = () => {
             <LegoBuildingTips />
             </div>
             <LegoYouTube/>
+            <AboutUs/>
             
             
         </>
