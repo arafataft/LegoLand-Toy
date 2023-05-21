@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { Container, Form, Button } from 'react-bootstrap';
 import { AuthContext } from '../../Providers/AuthProvider';
 import useTitle from '../../Hook/useTitle';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddAToy = () => {
   const { user } = useContext(AuthContext);
@@ -22,7 +24,7 @@ const AddAToy = () => {
     setIsSubmitting(true);
     // Send the form data to the backend API
     try {
-      const response = await fetch('http://localhost:3000/addToys', {
+      const response = await fetch('https://b7a11-toy-marketplace-server-side-arafataft.vercel.app/addToys', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -32,7 +34,7 @@ const AddAToy = () => {
       // Handle the response from the backend
       if (response.ok) {
         // Toy added successfully
-        console.log('Toy added successfully');
+        toast('Toy added successfully');
       } else {
         // Error adding toy
         console.log('Error adding toy');

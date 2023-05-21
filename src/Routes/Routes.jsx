@@ -44,7 +44,7 @@ const router = createBrowserRouter([
             {
                 path:'/toy/:id',
                 element:<PrivateRoute><ViewDetails/></PrivateRoute>,
-                loader: ()=>fetch('http://localhost:3000/allToy')
+                loader: ()=>fetch('https://b7a11-toy-marketplace-server-side-arafataft.vercel.app/allToy')
             },
             {
                 path:'/blogs',

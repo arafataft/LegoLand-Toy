@@ -37,7 +37,7 @@ const AllToys = () => {
 
   const fetchToys = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/allToys?search=${searchTerm}&page=${currentPage}&limit=${toysPerPage}`);
+      const response = await fetch(`https://b7a11-toy-marketplace-server-side-arafataft.vercel.app/allToys?search=${searchTerm}&page=${currentPage}&limit=${toysPerPage}`);
       const data = await response.json();
       setTotalPages(Math.ceil(data.totalCount / toysPerPage));
       return data.toys;

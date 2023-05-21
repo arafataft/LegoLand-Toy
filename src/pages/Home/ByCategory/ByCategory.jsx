@@ -15,7 +15,7 @@ const ByCategory = () => {
   useEffect(() => {
     const fetchToys = async () => {
       try {
-        const response = await fetch('http://localhost:3000/allToy');
+        const response = await fetch('https://b7a11-toy-marketplace-server-side-arafataft.vercel.app/allToy');
         if (response.ok) {
           const data = await response.json();
           setToysData(data);

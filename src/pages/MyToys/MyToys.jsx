@@ -21,7 +21,7 @@ const MyToys = () => {
 
   const fetchToys = useCallback(async () => {
     try {
-      const response = await fetch(`http://localhost:3000/Toys/${user?.email}`);
+      const response = await fetch(`https://b7a11-toy-marketplace-server-side-arafataft.vercel.app/Toys/${user?.email}`);
       if (response.ok) {
         const data = await response.json();
         setToys(data);
@@ -47,7 +47,7 @@ const MyToys = () => {
   const handleDeleteToy = async (id) => {
     if (window.confirm('Are you sure you want to delete this toy?')) {
       try {
-        const response = await fetch(`http://localhost:3000/deleteToy/${id}`, {
+        const response = await fetch(`https://b7a11-toy-marketplace-server-side-arafataft.vercel.app/deleteToy/${id}`, {
           method: 'DELETE',
         });
         if (response.ok) {
@@ -65,7 +65,7 @@ const MyToys = () => {
 
   const handleUpdateToy = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/updateToy/${selectedToy._id}`, {
+      const response = await fetch(`https://b7a11-toy-marketplace-server-side-arafataft.vercel.app/updateToy/${selectedToy._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
