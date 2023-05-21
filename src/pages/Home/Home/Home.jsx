@@ -34,9 +34,12 @@ const Home = () => {
             <div data-aos="fade-up">
             <LegoBuildingTips />
             </div>
+            <div data-aos="fade-up">
             <LegoYouTube/>
+            </div>
+            <div data-aos="fade-up">
             <AboutUs/>
-            
+            </div>
             
         </>
     );
