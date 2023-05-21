@@ -18,7 +18,7 @@ const MyToys = () => {
 
   const fetchToys = useCallback(async () => {
     try {
-      const response = await fetch(`http://localhost:3000/myToys/${user?.email}`);
+      const response = await fetch(`http://localhost:3000/Toys/${user?.email}`);
       if (response.ok) {
         const data = await response.json();
         setToys(data);
