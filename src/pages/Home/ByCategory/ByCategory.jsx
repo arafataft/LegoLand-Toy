@@ -65,18 +65,18 @@ const ByCategory = () => {
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink active={selectedTab === 'Math Toys'} onClick={() => handleTabClick('Math Toys')}>
-            Math Toys
+          <NavLink active={selectedTab === 'LEGO City'} onClick={() => handleTabClick('LEGO City')}>
+            LEGO City
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink active={selectedTab === 'Language Toys'} onClick={() => handleTabClick('Language Toys')}>
-            Language Toys
+          <NavLink active={selectedTab === 'LEGO Star Wars'} onClick={() => handleTabClick('LEGO Star Wars')}>
+            LEGO Star Wars
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink active={selectedTab === 'Engineering Toys'} onClick={() => handleTabClick('Engineering Toys')}>
-            Engineering Toys
+          <NavLink active={selectedTab === 'LEGO Architecture'} onClick={() => handleTabClick('LEGO Architecture')}>
+            LEGO Architecture
           </NavLink>
         </NavItem>
       </Nav>
@@ -102,7 +102,7 @@ const ByCategory = () => {
           </div>
         </TabPane>
 
-        <TabPane eventKey="Math Toys" className={selectedTab === 'Math Toys' ? 'show active' : ''}>
+        <TabPane eventKey="LEGO City" className={selectedTab === 'LEGO City' ? 'show active' : ''}>
           <div className="row">
             {filteredToys.map((toy) => (
               <div key={toy._id} className="col-lg-4 col-sm-12 mb-4">
@@ -122,7 +122,7 @@ const ByCategory = () => {
           </div>
         </TabPane>
 
-        <TabPane eventKey="Language Toys" className={selectedTab === 'Language Toys' ? 'show active' : ''}>
+        <TabPane eventKey="LEGO Star Wars" className={selectedTab === 'LEGO Star Wars' ? 'show active' : ''}>
           <div className="row">
             {filteredToys.map((toy) => (
               <div key={toy._id} className="col-lg-4 col-sm-12 mb-4">
@@ -142,7 +142,7 @@ const ByCategory = () => {
           </div>
         </TabPane>
 
-        <TabPane eventKey="Engineering Toys" className={selectedTab === 'Engineering Toys' ? 'show active' : ''}>
+        <TabPane eventKey="LEGO Architecture" className={selectedTab === 'LEGO Architecture' ? 'show active' : ''}>
           <div className="row">
             {filteredToys.map((toy) => (
               <div key={toy._id} className="col-lg-4 col-sm-12 mb-4">

@@ -97,9 +97,9 @@ const AddAToy = () => {
                     <Form.Label>Sub-category</Form.Label>
                     <Form.Control as="select" {...register('subCategory', { required: true })}>
                         <option value="">Select sub-category</option>
-                        <option value="Math Toys">Math Toys</option>
-                        <option value="Language Toys">Language Toys</option>
-                        <option value="Science Toys">Science Toys</option>
+                        <option value="LEGO City">LEGO City</option>
+                        <option value="LEGO Star Wars">LEGO Star Wars</option>
+                        <option value="LEGO Architecture">LEGO Architecture</option>
                     </Form.Control>
                     {errors.subCategory && <Form.Text className="text-danger">This field is required</Form.Text>}
                 </Form.Group>
