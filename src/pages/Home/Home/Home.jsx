@@ -6,6 +6,7 @@ import 'aos/dist/aos.css';
 import useTitle from "../../../Hook/useTitle";
 import Gallery from "../Gallery/Gallery";
 import LegoBuildingTips from "../LegoBuildingTips/LegoBuildingTips";
+import LegoYouTube from "../LegoYouTube/LegoYouTube";
 
 const Home = () => {
     useEffect(() => {
@@ -32,6 +33,7 @@ const Home = () => {
             <div data-aos="fade-up">
             <LegoBuildingTips />
             </div>
+            <LegoYouTube/>
             
             
         </>
