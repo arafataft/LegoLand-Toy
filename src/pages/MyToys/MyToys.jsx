@@ -1,8 +1,10 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
-import { Container, Table, Button, Modal, Image } from 'react-bootstrap';
+import { Container, Table, Button, Modal, Image, Spinner } from 'react-bootstrap';
 import useTitle from '../../Hook/useTitle';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MyToys = () => {
   const { user } = useContext(AuthContext);
@@ -13,6 +15,7 @@ const MyToys = () => {
   const [updatedQuantity, setUpdatedQuantity] = useState('');
   const [updatedDescription, setUpdatedDescription] = useState('');
   const [sortAscending, setSortAscending] = useState(false); // State for sorting direction
+  const [loading, setLoading] = useState(true);
 
   useTitle('My Toys');
 
@@ -22,6 +25,7 @@ const MyToys = () => {
       if (response.ok) {
         const data = await response.json();
         setToys(data);
+        setLoading(false);
       } else {
         console.log('Error fetching toys');
       }
@@ -36,6 +40,10 @@ const MyToys = () => {
     }
   }, [user, fetchToys]);
 
+  if (loading) {
+    return <Spinner animation="border" role="status" className="d-block mx-auto my-5"><span className="sr-only"></span></Spinner>;
+  }
+
   const handleDeleteToy = async (id) => {
     if (window.confirm('Are you sure you want to delete this toy?')) {
       try {
@@ -43,7 +51,7 @@ const MyToys = () => {
           method: 'DELETE',
         });
         if (response.ok) {
-          console.log('Toy deleted successfully');
+          toast('Toy deleted successfully');
           // Update the list of toys after deletion
           fetchToys();
         } else {
@@ -69,7 +77,7 @@ const MyToys = () => {
         }),
       });
       if (response.ok) {
-        console.log('Toy updated successfully');
+        toast('Toy updated successfully');
         // Close the modal and update the list of toys
         handleCloseModal();
         fetchToys();
