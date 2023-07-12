@@ -1,0 +1,28 @@
+.lego-news-container {
+    text-align: center;
+  }
+  
+  .lego-news-title {
+    margin-top: 40px;
+  }
+  
+  .news-article {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  
+  .article-image img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 20px;
+  }
+  
+  .article-content {
+    flex: 1;
+    text-align: left;
+  }
+  
