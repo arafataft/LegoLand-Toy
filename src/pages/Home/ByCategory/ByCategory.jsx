@@ -66,7 +66,7 @@ const ByCategory = () => {
   };
 
   return (
-    <div className='container my-5 pt-5'>
+    <div className='container mb-5 pt-5'>
       <h2 className="section-title">Category</h2>
       <Nav variant="tabs" className='pt-5'>
         <NavItem>

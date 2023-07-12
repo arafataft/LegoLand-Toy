@@ -1,0 +1,35 @@
+[
+    {
+      "id": 1,
+      "title": "Lego Launches New Technic Set: Exciting Building Experience for Lego Enthusiasts!",
+      "imageUrl": "https://source.unsplash.com/random/800x603/?lego-news",
+      "date": "2023-07-12",
+      "description": "Lego enthusiasts rejoice as Lego introduces a new Technic set that promises an exciting building experience. The new set is packed with innovative features and intricate details, providing hours of creative fun for builders of all ages. Stay tuned for more updates and get ready to embark on your next Lego adventure!",
+      "link": "/"
+    },
+    {
+      "id": 2,
+      "title": "Exclusive Sneak Peek: Lego Unveils New Star Wars Millennium Falcon Set!",
+      "imageUrl": "https://source.unsplash.com/random/800x602/?lego-news",
+      "date": "2023-07-13",
+      "description": "Brace yourself, Star Wars fans! Lego has just revealed a sneak peek of their highly anticipated Millennium Falcon set. This magnificent model captures the iconic spaceship in stunning detail, complete with minifigures of your favorite Star Wars characters. Get ready to join the battle against the dark side and relive epic moments from the Star Wars saga with this remarkable Lego set. Don't miss out on this collector's item that will transport you to a galaxy far, far away!",
+      "link": "/"
+    },
+    {
+      "id": 3,
+      "title": "New Lego City Theme Park: Endless Fun and Adventures Await!",
+      "imageUrl": "https://source.unsplash.com/random/800x609/?lego-news",
+      "date": "2023-07-15",
+      "description": "Attention thrill-seekers! Get ready for the grand opening of the brand-new Lego City Theme Park. Step into a world of excitement and imagination as you explore thrilling rides, interactive attractions, and captivating shows. From roller coasters to water slides, this theme park has it all. Gather your family and friends for an unforgettable adventure at Lego City Theme Park!",
+      "link": "/"
+    },
+    {
+      "id": 4,
+      "title": "Lego Friends: Heartlake Hospital Expansion Now Available!",
+      "imageUrl": "https://source.unsplash.com/random/800x607/?lego-news",
+      "date": "2023-07-18",
+      "description": "Calling all Lego Friends fans! The Heartlake Hospital is expanding with new additions and exciting features. Join Olivia, Mia, Emma, Stephanie, and Andrea as they provide care and support to the residents of Heartlake City. With state-of-the-art medical equipment, a maternity ward, and an ambulance, endless stories and adventures await in this heartwarming Lego Friends set. Get your stethoscope ready and let the healing begin!",
+      "link": "/"
+    }
+  ]
+  

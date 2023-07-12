@@ -8,6 +8,8 @@ import Gallery from "../Gallery/Gallery";
 import LegoBuildingTips from "../LegoBuildingTips/LegoBuildingTips";
 import LegoYouTube from "../LegoYouTube/LegoYouTube";
 import AboutUs from "../AboutUs/AboutUs";
+import Testimonials from "../Testimonials/Testimonials";
+import LegoNews from "../LegoNews/LegoNews";
 
 const Home = () => {
     useEffect(() => {
@@ -41,6 +43,9 @@ const Home = () => {
             <div data-aos="fade-up">
             <LegoYouTube/>
             </div>
+
+            <Testimonials/>
+            <LegoNews/>
             
             <div data-aos="fade-up">
             <AboutUs/>
