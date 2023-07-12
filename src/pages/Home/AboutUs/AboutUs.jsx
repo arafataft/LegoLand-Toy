@@ -15,7 +15,7 @@ const AboutUs = () => {
             <div className="about-us-content">
               <h3 className="about-us-title">LegoLand Toy Store!</h3>
               <p className="about-us-description">
-                We are passionate about Lego toys and bring you a wide range of sets, minifigures, and accessories. With years of experience, we aim to provide the best selection of Lego products to satisfy the Lego enthusiasts of all ages. Whether you are a seasoned collector or a beginner builder, we have something for everyone. Explore our website and start building your Lego world today!
+                We are passionate about Lego toys and bring you a wide range of sets, mini figures, and accessories. With years of experience, we aim to provide the best selection of Lego products to satisfy the Lego enthusiasts of all ages. Whether you are a seasoned collector or a beginner builder, we have something for everyone. Explore our website and start building your Lego world today!
               </p>
             </div>
           </Col>
