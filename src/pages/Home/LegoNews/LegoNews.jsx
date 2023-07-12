@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import './LegoNews.css'
-import { Container } from 'react-bootstrap';
+import './LegoNews.css';
+import { Button, Container } from 'react-bootstrap';
 
 const LegoNews = () => {
   const [newsData, setNewsData] = useState([]);
@@ -23,28 +23,58 @@ const LegoNews = () => {
     fetchNewsData();
   }, []);
 
+  const truncateText = (text, maxLength) => {
+    if (text.length <= maxLength) {
+      return text;
+    }
+    return text.slice(0, maxLength) + '...';
+  };
+
+  const handleReadMore = (articleId) => {
+    const updatedNewsData = newsData.map((article) => {
+      if (article.id === articleId) {
+        return {
+          ...article,
+          expanded: !article.expanded,
+        };
+      }
+      return article;
+    });
+    setNewsData(updatedNewsData);
+  };
+
   return (
-    <Container className='mt-5 pt-4'>
-        <div className="lego-news-container">
-      <h2 className="lego-news-title pb-5">Lego News</h2>
-      <div className="news-articles">
-        {newsData.map((article) => (
-          <div key={article.id} className="news-article">
-            <div className="article-image">
-              <img src={article.imageUrl} alt={article.title} />
+    <Container className="mt-5 pt-4">
+      <div className="lego-news-container">
+        <h2 className="lego-news-title pb-5">Lego News</h2>
+        <div className="news-articles">
+          {newsData.map((article) => (
+            <div key={article.id} className="news-article">
+              <div className="article-image">
+                <img src={article.imageUrl} alt={article.title} />
+              </div>
+              <div className="article-content">
+                <h3>{article.title}</h3>
+                <p>{article.date}</p>
+                <p>
+                  {article.expanded
+                    ? article.description
+                    : truncateText(article.description, 100)}
+                </p>
+                {article.description.length > 100 && (
+                  <Button variant='info'
+                    className="read-more-button "
+                    onClick={() => handleReadMore(article.id)}
+                  >
+                    {article.expanded ? 'Read Less' : 'Read More'}
+                  </Button>
+                )}
+
+              </div>
             </div>
-            <div className="article-content">
-              <h3>{article.title}</h3>
-              <p>{article.date}</p>
-              <p>{article.description}</p>
-              <a href={article.link} target="_blank" rel="noopener noreferrer">
-                Read More
-              </a>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
     </Container>
   );
 };
